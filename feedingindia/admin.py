@@ -1,6 +1,5 @@
 from django.contrib import admin
-from feedingindia.models import Volunteer, Donation, Shelter
+from feedingindia.models import Volunteer
 
 admin.site.register(Volunteer)
-admin.site.register(Donation)
-admin.site.register(Shelter)
+
