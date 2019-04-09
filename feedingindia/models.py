@@ -2,7 +2,7 @@ from django.db import models
 
 class Volunteer(models.Model):
     name = models.CharField(max_length=250, null=True)
-    email = models.EmailField(max_length=70, blank=True)
+    email = models.EmailField(max_length=70, blank=True, null=True)
     contact = models.CharField(max_length=250, null=True)
     address = models.CharField(max_length=250, null=True)
     pincode = models.IntegerField()
@@ -22,7 +22,7 @@ class Donater(models.Model):
     institution = models.CharField(max_length=250, null=True)
     name = models.CharField(max_length = 100 , null=True)
     contact = models.CharField(max_length = 250,null=True)
-    email = models.EmailField(max_length=70, blank=True)
+    email = models.EmailField(max_length=70, blank=True, null=True)
     designation = models.CharField(max_length = 250,null=True)
     address = models.CharField(max_length=250, null=True)
     pincode = models.IntegerField()
@@ -33,3 +33,36 @@ class Donater(models.Model):
     def __unicode__(self):
         return self.name
 
+class Shelter(models.Model):
+    name_hunger_spot = models.CharField(max_length = 100 , null=True)
+    address = models.CharField(max_length = 250,null=True)
+    pincode = models.IntegerField()
+    total_benefitiaries = models.IntegerField()
+    type_shelter = models.CharField(max_length = 100 , null=True)
+    raw_food = models.CharField(max_length = 250,null=True)
+    cooked_food = models.CharField(max_length = 250,null=True)
+    preference = models.CharField(max_length = 250,null=True)
+    time_range = models.CharField(max_length = 250,null=True)
+    heat_food = models.CharField(max_length = 250,null=True)
+    refrigerate_food = models.CharField(max_length = 250,null=True)
+    external_support = models.CharField(max_length = 250,null=True)
+    support = models.CharField(max_length = 250,null=True)
+    reg_status = models.CharField(max_length = 250,null=True)
+    name_incharge = models.CharField(max_length = 250,null=True)
+    contact_incharge = models.CharField(max_length = 250, null=True)
+    email_incharge = models.EmailField(max_length=70, blank=True,null=True)
+    latitude = models.CharField(max_length=1000, null=True)
+    longitude = models.CharField(max_length=1000, null=True)
+    
+    def __unicode__(self):
+        return self.name
+
+
+
+
+
+	# venue_address = models.CharField(max_length = 250,null=True)
+ #    venue_pincode = models.CharField(max_length = 250,null=True)
+ #    time = models.CharField(max_length = 250,null=True)
+ #    request = models.CharField(max_length = 250,null=True)
+ #    drop_off = models.CharField(max_length = 250,null=True)
