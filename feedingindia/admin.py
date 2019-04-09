@@ -1,3 +1,6 @@
 from django.contrib import admin
+from feedingindia.models import Volunteer, Donation, Shelter
 
-# Register your models here.
+admin.site.register(Volunteer)
+admin.site.register(Donation)
+admin.site.register(Shelter)
