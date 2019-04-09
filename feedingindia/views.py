@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from feedingindia.models import Volunteer
+from feedingindia.models import Volunteer, Donater
 
 
 
@@ -38,5 +38,34 @@ def data_add_volunteer(request):
             )
 	print(context_dict)
 
+def donater(request):
+	return render(request, 'feedingindia/donater.html')
 
-
+@csrf_exempt
+def data_add_donater(request):
+	context_dict = {}
+	context_dict["partnering_entity"] = request.POST.get("partnering_entity")
+	context_dict["institution"] = request.POST.get("institution")
+	context_dict["name"] = request.POST.get("name")
+	context_dict["contact"] = request.POST.get("contact")
+	context_dict["email"] = request.POST.get("email")
+	context_dict["designation"] = request.POST.get("designation")
+	context_dict["address"] = request.POST.get("address")
+	context_dict["pincode"] = request.POST.get("pincode")
+	context_dict["additional"] = request.POST.get("additional")
+	context_dict["latitude"] = request.POST.get("lat")
+	context_dict["longitude"] = request.POST.get("lng")
+	donater_instance = Donater.objects.create(
+            partnering_entity=request.POST.get("partnering_entity"),
+            institution=request.POST.get("institution"),
+            name=request.POST.get("name"),
+            contact=request.POST.get("contact"),
+            email=request.POST.get("email"),
+            designation=request.POST.get("designation"),
+            address=request.POST.get("address"),
+            pincode=request.POST.get("pincode"),
+            additional=request.POST.get("additional"),
+            latitude=request.POST.get("lat"),
+            longitude=request.POST.get("lng")
+            )
+	print(context_dict)
