@@ -38,8 +38,10 @@ def data_add_volunteer(request):
             )
 	print(context_dict)
 
+
 def donater(request):
 	return render(request, 'feedingindia/donater.html')
+
 
 @csrf_exempt
 def data_add_donater(request):
@@ -70,8 +72,10 @@ def data_add_donater(request):
             )
 	print(context_dict)
 
+
 def shelter(request):
 	return render(request, 'feedingindia/shelter.html')
+
 
 @csrf_exempt
 def data_add_shelter(request):
