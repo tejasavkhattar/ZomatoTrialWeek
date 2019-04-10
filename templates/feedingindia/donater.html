@@ -121,6 +121,12 @@
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
   }
+  google.maps.event.addListener(marker, 'dragend', function (event) {
+            document.getElementById("lat").value = event.latLng.lat();
+            document.getElementById("lng").value = event.latLng.lng();
+            document.data_add_donater.lat.value = event.latLng.lat();
+            document.data_add_donater.lng.value = event.latLng.lng();
+        });
   //END GET POSITION
 }
 

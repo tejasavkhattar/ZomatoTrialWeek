@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Feeding India</title>
+<style type="text/css">
+  #map {
+    height:600px;
+  }
+</style>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8eT387-v_njomM_MPkKu1yNP-v-3EmCw&callback=initMap" async defer></script>
+    <!-- Bootstrap core CSS -->
+<link href="https://getbootstrap.com/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+<!-- Custom styles for this template -->
+  </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="map">
+                        </div>
+                </div>
+            </div>
+        </div>
+        <!-- <script>
+        
+      var map;
+      function initMap() {
+        // Constructor creates a new map - only center and zoom are required.
+        map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 40, lng:0},
+        zoom:17
+        });
+          {% for item in coordinatelist %}
+            var latlongcoordinates{{ forloop.counter }} = new google.maps.LatLng({{item.0}},{{item.1}});
+            var mapOptions = {zoom: 10, center: latlongcoordinates{{ forloop.counter }} }
+            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+            var marker{{ forloop.counter }} = new google.maps.Marker({
+            position: latlongcoordinates{{ forloop.counter }},
+            title:"Mymarker"});
+            marker{{ forloop.counter }}.setMap(map);
+        {% endfor %}
+      }
+        </script> -->
+        <script>
+            
+            function initMap() {
+
+        // Constructor creates a new map - only center and zoom are required.
+                var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 28, lng:77},
+                zoom:10
+                });
+
+                var markers_volunteer = volunteer_locations.map(function(location) {
+                    return new google.maps.Marker({
+                      icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                      position: location
+                    });
+                  });
+
+                var markerCluster1 = new MarkerClusterer(map, markers_volunteer,
+                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+                
+
+                var markers_donator = donator_locations.map(function(location) {
+                    return new google.maps.Marker({
+                      icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                      position: location
+                    });
+                  });
+
+                var markerCluster2 = new MarkerClusterer(map, markers_donator,
+                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+                } 
+
+
+            
+                var volunteer_locations = [ 
+                {% for item in volunteer_coordinate %}
+                { lat:{{item.0}}, lng:{{item.1}} }, 
+                {% endfor %}  
+                ]
+                
+                var donator_locations = [ 
+                {% for item in donater_coordinate %}
+                { lat:{{item.0}}, lng:{{item.1}} }, 
+                {% endfor %}  
+                ]
+
+                var shelter_locations = [ 
+                {% for item in shelter_coordinate %}
+                { lat:{{item.0}}, lng:{{item.1}} }, 
+                {% endfor %}  
+                ]
+            
+        </script>
+    
+    
+
+    </body>
+</html>

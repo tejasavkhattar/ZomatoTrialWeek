@@ -123,4 +123,34 @@ def data_add_shelter(request):
 	print(context_dict)
 
 
+def maps(request):
+	volunteer_instance = Volunteer.objects.all()
+	context_dict={}
+	arr = []
+	for i in volunteer_instance:
+		volunteer_data = []
+		volunteer_data.append(float(i.latitude))
+		volunteer_data.append(float(i.longitude))
+		arr.append(volunteer_data)
+	context_dict['volunteer_coordinate'] = arr
+
+	donater_instance = Donater.objects.all()
+	arr1 = []
+	for i in donater_instance:
+		donater_data = []
+		donater_data.append(float(i.latitude))
+		donater_data.append(float(i.longitude))
+		arr1.append(donater_data)
+	context_dict['donater_coordinate'] = arr1	
+
+	shelter_instance = Shelter.objects.all()
+	arr2 = []
+	for i in shelter_instance:
+		shelter_data = []
+		shelter_data.append(float(i.latitude))
+		shelter_data.append(float(i.longitude))
+		arr2.append(shelter_data)
+	context_dict['shelter_coordinate'] = arr1	
+	print(context_dict)
+	return render(request, 'feedingindia/maps.html', context_dict)
 	

@@ -58,8 +58,11 @@ class Shelter(models.Model):
         return self.name
 
 
-
-
+# class Donation(models.Model):
+#     name = models.CharField(max_length=250, null=True)
+#     contact = models.CharField(max_length=250, null=True)
+#     address = models.CharField(max_length=250, null=True)
+#     pincode = models.IntegerField()
 
 	# venue_address = models.CharField(max_length = 250,null=True)
  #    venue_pincode = models.CharField(max_length = 250,null=True)

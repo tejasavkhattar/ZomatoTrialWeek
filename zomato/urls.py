@@ -13,4 +13,6 @@ urlpatterns = [
     url(r'^data_add_donater$','feedingindia.views.data_add_donater',name='data_add_donater'),
     url(r'^shelter$','feedingindia.views.shelter',name='shelter'),
     url(r'^data_add_shelter$','feedingindia.views.data_add_shelter',name='data_add_shelter'),
+    url(r'^maps$','feedingindia.views.maps',name='maps'),
+    
 ]

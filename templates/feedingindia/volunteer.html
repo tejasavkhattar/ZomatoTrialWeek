@@ -124,6 +124,7 @@
       map.setCenter(pos);
       document.data_add_volunteer.lat.value = position.coords.latitude;
       document.data_add_volunteer.lng.value = position.coords.longitude;
+      
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
@@ -131,6 +132,12 @@
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
   }
+  google.maps.event.addListener(marker, 'dragend', function (event) {
+            document.getElementById("lat").value = event.latLng.lat();
+            document.getElementById("lng").value = event.latLng.lng();
+            document.data_add_volunteer.lat.value = event.latLng.lat();
+            document.data_add_volunteer.lng.value = event.latLng.lng();
+        });
   //END GET POSITION
 }
 
