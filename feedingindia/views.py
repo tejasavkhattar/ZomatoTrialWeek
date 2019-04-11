@@ -164,6 +164,7 @@ def data_add_volunteer(request):
 	print(context_dict)
 
 
+
 def donater(request):
 	return render(request, 'feedingindia/donater.html')
 
@@ -197,6 +198,25 @@ def data_add_donater(request):
             )
 	print(context_dict)
 
+def render_donator_data(request):
+	donater_instance = Donater.objects.all()
+	context_dict={}
+	arr = []
+	for i in donater_instance:
+		donater_data = {}
+		donater_data['partnering_entity'] = i.partnering_entity
+		donater_data['institution'] = i.institution
+		donater_data['name'] = i.name
+		donater_data['contact'] = i.contact
+		donater_data['email'] = i.email
+		donater_data['designation'] = i.designation
+		donater_data['address'] = i.address
+		donater_data['pincode'] = i.pincode
+		donater_data['additional'] = i.additional
+		arr.append(donater_data)
+	context_dict['arr'] = arr
+	print(context_dict)
+	return render(request, 'admin/dashboard/all_donators.html', context_dict)
 
 def shelter(request):
 	return render(request, 'feedingindia/shelter.html')
@@ -248,34 +268,58 @@ def data_add_shelter(request):
 	print(context_dict)
 
 
-def maps(request):
+def render_shelter_data_public(request):
+	shelter_instance = Shelter.objects.all()
+	context_dict={}
+	arr = []
+	for i in shelter_instance:
+		shelter_data = {}
+		shelter_data['name_hunger_spot'] = i.name_hunger_spot
+		shelter_data['address'] = i.address
+		shelter_data['pincode'] = i.pincode
+		shelter_data['total_benefitiaries'] = i.total_benefitiaries
+		shelter_data['type_shelter'] = i.type_shelter
+		shelter_data['raw_food'] = i.raw_food
+		shelter_data['cooked_food'] = i.cooked_food
+		shelter_data['preference'] = i.preference
+		shelter_data['time_range'] = i.time_range
+		shelter_data['heat_food'] = i.heat_food
+		shelter_data['refrigerate_food'] = i.refrigerate_food
+		shelter_data['external_support'] = i.external_support
+		shelter_data['support'] = i.support
+		shelter_data['reg_status'] = i.reg_status
+		shelter_data['name_incharge'] = i.name_incharge
+		shelter_data['contact_incharge'] = i.contact_incharge
+		shelter_data['email_incharge'] = i.email_incharge
+		arr.append(shelter_data)
+	context_dict['arr'] = arr
+	print(context_dict)
+	return render(request, 'feedingindia/Shelter/all_shelter.html', context_dict)
+
+def render_volunteer_data(request):
 	volunteer_instance = Volunteer.objects.all()
 	context_dict={}
 	arr = []
 	for i in volunteer_instance:
-		volunteer_data = []
-		volunteer_data.append(float(i.latitude))
-		volunteer_data.append(float(i.longitude))
+		volunteer_data = {}
+		volunteer_data['name'] = i.name
+		volunteer_data['email'] = i.email
+		volunteer_data['contact'] = i.contact
+		volunteer_data['address'] = i.address
+		volunteer_data['pincode'] = i.pincode
+		volunteer_data['age'] = i.age
+		volunteer_data['institution'] = i.institution
+		volunteer_data['educational_background'] = i.educational_background
+		volunteer_data['contribution_time'] = i.contribution_time
+		volunteer_data['why_join'] = i.why_join
+		volunteer_data['latitude'] = i.latitude
+		volunteer_data['longitude'] = i.longitude
 		arr.append(volunteer_data)
-	context_dict['volunteer_coordinate'] = arr
-
-	donater_instance = Donater.objects.all()
-	arr1 = []
-	for i in donater_instance:
-		donater_data = []
-		donater_data.append(float(i.latitude))
-		donater_data.append(float(i.longitude))
-		arr1.append(donater_data)
-	context_dict['donater_coordinate'] = arr1	
-
-	shelter_instance = Shelter.objects.all()
-	arr2 = []
-	for i in shelter_instance:
-		shelter_data = []
-		shelter_data.append(float(i.latitude))
-		shelter_data.append(float(i.longitude))
-		arr2.append(shelter_data)
-	context_dict['shelter_coordinate'] = arr1	
+	context_dict['arr'] = arr
 	print(context_dict)
-	return render(request, 'feedingindia/maps.html', context_dict)
+	return render(request, 'admin/dashboard/all_volunteer.html', context_dict)
+
+
 	
+def index(request):
+	return render(request, 'feedingindia/index.html')

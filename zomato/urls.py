@@ -8,6 +8,11 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^index$','feedingindia.views.index',name='index'),
+    url(r'^render_volunteer_data$','feedingindia.views.render_volunteer_data',name='render_volunteer_data'),
+    url(r'^render_donator_data$','feedingindia.views.render_donator_data',name='render_donator_data'),
+    url(r'^render_shelter_data$','feedingindia.views.render_shelter_data',name='render_shelter_data'),
+    url(r'^render_shelter_data_public$','feedingindia.views.render_shelter_data_public',name='render_shelter_data_public'),
     url(r'^volunteer$','feedingindia.views.volunteer',name='volunteer'),
     url(r'^data_add_volunteer$','feedingindia.views.data_add_volunteer',name='data_add_volunteer'),
     url(r'^donater$','feedingindia.views.donater',name='donater'),
