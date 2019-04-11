@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Feeding India</title>
+<style type="text/css">
+  #map {
+    height:120px;
+  }
+</style>
+    <!-- Bootstrap core CSS -->
+<link href="https://getbootstrap.com/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="cover.css" rel="stylesheet">
+
+  </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <form name="data_add_donater" action="/data_add_donater" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                          <label for="partnering_entity">What is the partnering Entity ?</label>
+                          <select class="form-control" id="partnering_entity" name="partnering_entity">
+                            <option>College</option>
+                            <option>Food Supplier</option>
+                            <option>Corporate</option>
+                            <option>Event Caterer</option>
+                            <option>Event Organiser</option>
+                            <option>Factory</option>
+                            <option>Hospitals</option>
+                            <option>Hotel</option>
+                            <option>Individual</option>
+                            <option>Restaurant</option>
+                            <option>RWA</option>
+                            <option>School</option>
+                            <option>Group of Volunteer</option>
+                            <option>Other</option>''
+                          </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="institution">Institution/Company Name</label>
+                            <input type="text" class="form-control" id="institution" name="institution" placeholder="Street, City">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Contact</label>
+                            <input type="number" class="form-control" id="contact" name="contact" placeholder="+91-XXXXXXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Designation/Role</label>
+                            <input type="text" class="form-control" id="designation" name="designation" placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Street, City">
+                        </div>
+                        <div class="form-group">
+                            <label for="pincode">Pincode</label>
+                            <input type="number" class="form-control" id="pincode" name="pincode" placeholder="18">
+                        </div>
+                        <div class="form-group">
+                            <label for="why_join">Additional Comments</label>
+                            <textarea class="form-control" id="additional" name="additional" rows="3"></textarea>
+                        </div>
+                        <input type="hidden" name="lat" id="lat">
+                        <input type="hidden" name="lng" id="lng">
+                        <div id="map">
+                        </div>
+                        <br>
+                        <center> <button type="submit" class="btn btn-light">Submit</button> </center>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script>
+      var map, infoWindow;
+      function initMap() {
+        
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 17
+        });
+         marker = new google.maps.Marker({
+    map: map,
+    draggable: true,
+    animation: google.maps.Animation.DROP,
+    position: {
+      lat: 59.909144,
+      lng: 10.7436936
+    }
+  });
+  marker.addListener('click', toggleBounce);
+          infoWindow = new google.maps.InfoWindow;
+
+      if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      marker.setPosition(pos);
+      marker.setTitle('Your position is '+(Math.round(pos.lat * 100) / 100)+", "+(Math.round(pos.lng * 100) / 100));
+      map.setCenter(pos);
+      document.data_add_donater.lat.value = position.coords.latitude;
+      document.data_add_donater.lng.value = position.coords.longitude;
+    }, function() {
+      handleLocationError(true, infoWindow, map.getCenter());
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
+  google.maps.event.addListener(marker, 'dragend', function (event) {
+            document.getElementById("lat").value = event.latLng.lat();
+            document.getElementById("lng").value = event.latLng.lng();
+            document.data_add_donater.lat.value = event.latLng.lat();
+            document.data_add_donater.lng.value = event.latLng.lng();
+        });
+  //END GET POSITION
+}
+
+            function toggleBounce() {
+  if (marker.getAnimation() !== null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8eT387-v_njomM_MPkKu1yNP-v-3EmCw&callback=initMap" async defer></script>
+    </body>
+
+
+</html>

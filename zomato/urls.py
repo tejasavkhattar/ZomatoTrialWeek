@@ -9,6 +9,11 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^index$','feedingindia.views.index',name='index'),
+    url(r'^donator_public$','feedingindia.views.donator_public',name='donator_public'),
+    url(r'^shelter_public$','feedingindia.views.shelter_public',name='shelter_public'),
+    url(r'^volunteer_public$','feedingindia.views.volunteer_public',name='volunteer_public'),
+    url(r'^donator_cards$','feedingindia.views.donator_cards',name='donator_cards'),
+    url(r'^volunteer_cards$','feedingindia.views.volunteer_cards',name='volunteer_cards'),
     url(r'^render_volunteer_data$','feedingindia.views.render_volunteer_data',name='render_volunteer_data'),
     url(r'^render_donator_data$','feedingindia.views.render_donator_data',name='render_donator_data'),
     url(r'^render_shelter_data$','feedingindia.views.render_shelter_data',name='render_shelter_data'),

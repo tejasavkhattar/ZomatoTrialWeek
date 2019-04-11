@@ -101,8 +101,7 @@ def add_data_donating(request):
         address=request.POST.get("address"),
         time_donate=request.POST.get("time"),
         date_donate=request.POST.get("date"),
-        food_for_donate=request.POST.get("food_for"),
-        counter=0,
+        food_for_donate=request.POST.get("food_for_donate"),
         )
 	date_time = strftime("%Y-%m-%d %H:%M:%S", gmtime()).split(" ")
 	date = date_time[0].split("-")
@@ -124,13 +123,13 @@ def add_data_donating(request):
 					volunteer_data.append(i.food_for_donate)
 					volunteer_data.append(i.counter)
 					arr.append(volunteer_data)
-	context_dict['volunteer_coordinate'] = arr
+	context_dict['volunteer_arr'] = arr
 	print(context_dict)
-	return render(request, 'feedingindia/volunteer_pickup.html', context_dict)
+	return render(request, 'feedingindia/Donator/volunteer_pickup.html', context_dict)
 
 
 def volunteer(request):
-	return render(request, 'feedingindia/volunteer.html')
+	return render(request, 'feedingindia/Volunteer/volunteer.html')
 
 @csrf_exempt
 def data_add_volunteer(request):
@@ -166,7 +165,7 @@ def data_add_volunteer(request):
 
 
 def donater(request):
-	return render(request, 'feedingindia/donater.html')
+	return render(request, 'feedingindia/Donator/donater.html')
 
 
 @csrf_exempt
@@ -219,7 +218,7 @@ def render_donator_data(request):
 	return render(request, 'admin/dashboard/all_donators.html', context_dict)
 
 def shelter(request):
-	return render(request, 'feedingindia/shelter.html')
+	return render(request, 'feedingindia/Shelter/shelter.html')
 
 
 @csrf_exempt
@@ -323,3 +322,20 @@ def render_volunteer_data(request):
 	
 def index(request):
 	return render(request, 'feedingindia/index.html')
+
+def donator_public(request):
+	return render(request, 'feedingindia/donate.html')
+
+def shelter_public(request):
+	return render(request, 'feedingindia/shelter.html')
+
+def volunteer_public(request):
+	return render(request, 'feedingindia/volunteer.html')
+
+
+def volunteer_cards(request):
+	return render(request, 'feedingindia/Volunteer/volunteer_cards.html')
+
+def donator_cards(request):
+	return render(request, 'feedingindia/Donator/donator_cards.html')
+

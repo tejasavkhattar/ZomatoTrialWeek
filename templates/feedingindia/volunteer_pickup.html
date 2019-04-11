@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+  {% load staticfiles %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -10,7 +11,7 @@
     <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <!-- Custom styles for this template -->
-    <link href="album.css" rel="stylesheet">
+     <link href="{% static 'album.css' %}" rel="stylesheet">
   </head>
 
   <body>
@@ -28,72 +29,36 @@
       </section>
         
         
-
-      <div class="album py-5 bg-light">
         <div class="container">
           <div class="row">
+            {% for item in volunteer_arr %}
             <div class="col-md-4">
               <div class="w3-card-4">
                 <header class="w3-container w3-light-grey">
-                  <h3>Name</h3>
+                  <h3>{{item.name}}</h3>
                 </header>
                 <div class="w3-container">
-                  <p>Address</p>
+                  <p>Address: {{item.address}}</p>
                   <hr>
-                  <p>Time</p>
+                  <p>Contact: {{item.contact}}</p>
+                  <hr>
+                  <p>Time: {{item.time_donate}}</p>
+                  <hr>
+                  <p>Date: {{item.date_donate}} </p>
                     <hr>
-                  <p>Date</p>
-                    <hr>
-                  <p>Food for </p>
+                  <p>Food for: {{item.food_for_donate}} people</p>
                     <small class="text-muted">1 interested</small>
                 </div> 
                 <button class="w3-button w3-block w3-dark-grey">Interested</button>
                 </div>
             </div>
-              <div class="col-md-4">
-              <div class="w3-card-4">
-                <header class="w3-container w3-light-grey">
-                  <h3>Name</h3>
-                </header>
-                <div class="w3-container">
-                  <p>Address</p>
-                  <hr>
-                  <p>Time</p>
-                    <hr>
-                  <p>Date</p>
-                    <hr>
-                  <p>Food for </p>
-                    <small class="text-muted">1 interested</small>
-                </div> 
-                <button class="w3-button w3-block w3-dark-grey">Interested</button>
-                </div>
-            </div>
-              <div class="col-md-4">
-              <div class="w3-card-4">
-                <header class="w3-container w3-light-grey">
-                  <h3>Name</h3>
-                </header>
-                <div class="w3-container">
-                  <p>Address</p>
-                  <hr>
-                  <p>Time</p>
-                    <hr>
-                  <p>Date</p>
-                    <hr>
-                  <p>Food for </p>
-                    <small class="text-muted">1 interested</small>
-                </div> 
-                <button class="w3-button w3-block w3-dark-grey">Interested</button>
-                </div>
-            </div>
-      
               
-           
-           
+     {% endfor %}       
+      
         
           </div>
         </div>
-      </div>
+     ss
 
     </main>
 
