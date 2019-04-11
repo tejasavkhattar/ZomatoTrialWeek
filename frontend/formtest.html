@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Feeding India</title>
+<style type="text/css">
+  #map {
+    height:120px;
+  }
+</style>
+    <!-- Bootstrap core CSS -->
+<link href="https://getbootstrap.com/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="cover.css" rel="stylesheet">
+
+  </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <form name="data_add_volunteer" action="/data_add_volunteer" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Contact</label>
+                            <input type="number" class="form-control" id="contact" name="contact" placeholder="+91-XXXXXXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Street, City">
+                        </div>
+                        <div class="form-group row">
+  <label for="example-time-input" class="col-2 col-form-label">Time</label>
+  <div class="col-10">
+    <input class="form-control" type="time" value="13:45:00" id="example-time-input">
+  </div>
+</div>
+                        <div class="form-group row">
+  <label for="example-date-input" class="col-2 col-form-label">Date</label>
+  <div class="col-10">
+    <input class="form-control" type="date" date-data-format="dd-MM-yyyy"  data-date-useseconds="false"
+        data-date-pickDate="false" value="2011-08-19" id="example-date-input">
+  </div>
+</div>
+                        <div class="form-group">
+                            <label for="food_for">food for</label>
+                            <input type="number" class="form-control" id="food_for" name="pincode" placeholder="18">
+                        </div>
+                        
+                        <br>
+                        <center> <button type="submit" class="btn btn-light">Submit</button> </center>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+
+    </body>
+
+
+</html>

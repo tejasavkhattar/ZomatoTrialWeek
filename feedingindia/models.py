@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Volunteer(models.Model):
     name = models.CharField(max_length=250, null=True)
@@ -58,11 +59,24 @@ class Shelter(models.Model):
         return self.name
 
 
-# class Donation(models.Model):
-#     name = models.CharField(max_length=250, null=True)
-#     contact = models.CharField(max_length=250, null=True)
-#     address = models.CharField(max_length=250, null=True)
-#     pincode = models.IntegerField()
+class Donation(models.Model):
+    name = models.CharField(max_length=250, null=True)
+    contact = models.CharField(max_length=250, null=True)
+    address = models.CharField(max_length=250, null=True)
+    date_donate = models.CharField(max_length = 250,null=True)
+    time_donate = models.CharField(max_length = 250,null=True)
+    food_for_donate = models.IntegerField()
+    counter = models.IntegerField()
+
+    def __unicode__(self):
+        return self.name
+
+
+class Admin(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
 
 	# venue_address = models.CharField(max_length = 250,null=True)
  #    venue_pincode = models.CharField(max_length = 250,null=True)

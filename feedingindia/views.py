@@ -1,7 +1,132 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
-from feedingindia.models import Volunteer, Donater, Shelter
+from feedingindia.models import Volunteer, Donater, Shelter, Donation
+from feedingindia.forms import SignUpForm, LoginForm
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import resolve
+from time import gmtime, strftime
 
+
+@csrf_exempt
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            auth_login(request, user)
+            return redirect('dashboard')
+    else:
+        form = SignUpForm()
+    dictionary = {'form': form}
+    return render(request, 'admin/signup.html', dictionary)
+
+
+@csrf_exempt
+def login(request):
+    form = LoginForm()
+    context_dict = {}
+    context_dict['form'] = form
+    error_message = ""
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            auth_login(request, user)
+            current_url = resolve(request.path_info).url_name
+            # Redirect to a success page.
+            return redirect('dashboard')
+        else:
+            error_message = "Incorrect username or password"
+            form = LoginForm()
+            context_dict['form'] = form
+            context_dict['error_message'] = error_message
+    return render(request, 'admin/login.html', context_dict)
+
+
+@csrf_exempt
+def logout(request):
+    auth_logout(request)
+    return render(request, 'feedingindia/login.html')
+
+
+@login_required
+def dashboard(request):
+	volunteer_instance = Volunteer.objects.all()
+	context_dict={}
+	arr = []
+	for i in volunteer_instance:
+		volunteer_data = []
+		volunteer_data.append(float(i.latitude))
+		volunteer_data.append(float(i.longitude))
+		arr.append(volunteer_data)
+	context_dict['volunteer_coordinate'] = arr
+
+	donater_instance = Donater.objects.all()
+	arr1 = []
+	for i in donater_instance:
+		donater_data = []
+		donater_data.append(float(i.latitude))
+		donater_data.append(float(i.longitude))
+		arr1.append(donater_data)
+	context_dict['donater_coordinate'] = arr1	
+
+	shelter_instance = Shelter.objects.all()
+	arr2 = []
+	for i in shelter_instance:
+		shelter_data = []
+		shelter_data.append(float(i.latitude))
+		shelter_data.append(float(i.longitude))
+		arr2.append(shelter_data)
+	context_dict['shelter_coordinate'] = arr2	
+	print(context_dict)
+	return render(request, 'admin/dashboard.html',context_dict)
+
+
+def donating(request):
+	return render(request, 'feedingindia/donating.html')
+
+
+def add_data_donating(request):
+	instance = Donation.objects.create(
+        name=request.POST.get("name"),
+        contact=request.POST.get("contact"),
+        address=request.POST.get("address"),
+        time_donate=request.POST.get("time"),
+        date_donate=request.POST.get("date"),
+        food_for_donate=request.POST.get("food_for"),
+        counter=0,
+        )
+	date_time = strftime("%Y-%m-%d %H:%M:%S", gmtime()).split(" ")
+	date = date_time[0].split("-")
+	time = date_time[1]
+	instance = Donation.objects.all()
+	context_dict={}
+	arr = []
+	for i in instance:
+		volunteer_data = []
+		vol_date = i.date_donate.split("-")
+		if(int(vol_date[0])>int(date[0])):
+			if(int(vol_date[1])>int(date[1])):
+				if(int(vol_date[2])>int(date[2])):
+					volunteer_data.append(i.name)
+					volunteer_data.append(i.contact)
+					volunteer_data.append(i.address)
+					volunteer_data.append(i.time_donate)
+					volunteer_data.append(i.date_donate)
+					volunteer_data.append(i.food_for_donate)
+					volunteer_data.append(i.counter)
+					arr.append(volunteer_data)
+	context_dict['volunteer_coordinate'] = arr
+	print(context_dict)
+	return render(request, 'feedingindia/volunteer_pickup.html', context_dict)
 
 
 def volunteer(request):

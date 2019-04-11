@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_REDIRECT_URL = 'dashboard'
 
 
 
@@ -103,7 +104,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_ROOT = 'staticfiles'
+STATIC_PATH = os.path.join(BASE_DIR,'static/feedingindia')
+
+STATIC_URL = '/static/' 
+
+STATICFILES_DIRS = (
+    STATIC_PATH,
+)
 
 CORS_ORIGIN_ALLOW_ALL = True   
 CORS_ALLOW_CREDENTIALS = True
