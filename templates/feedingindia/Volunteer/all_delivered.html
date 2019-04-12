@@ -34,23 +34,23 @@
             <div class="col-md-4">
               <div class="w3-card-4">
                 <header class="w3-container w3-light-grey">
-                  <h3>{{item.name}}</h3>
+                  <h3>{{item.name_shelter}}</h3>
                 </header>
                 <div class="w3-container">
-                  <p>Address: {{item.address}}</p>
+                  <p>Donater: {{item.name_donator}}</p>
                   <hr>
-                  <p>Contact: {{item.contact}}</p>
+                  <p>Contact: {{item.contact_donator}}</p>
                   <hr>
-                  <p>Type: {{item.type_of_donation}}</p>
+                  <p>Shelter Address: {{item.address_shelter}}</p>
                   <hr>
-                  <p>Time: {{item.time_donate}}</p>
+                  <p>Time: {{item.time_delivery}}</p>
                   <hr>
-                  <p>Date: {{item.date_donate}} </p>
+                  <p>Date: {{item.date_delivery}} </p>
                     <hr>
                   <p>Food for: {{item.food_for_donate}} people</p>
                     <small class="text-muted">{{item.counter}} interested</small>
                 </div> 
-              <form name="data_add_volunteer" action="upvoter/{{item.contact}}" method="post" enctype="multipart/form-data">
+              <form name="data_add_volunteer" action="upvoter1/{{item.contact_donator}}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <button class="w3-button w3-block w3-dark-grey">Interested</button>
                 </div>

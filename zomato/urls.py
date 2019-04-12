@@ -31,10 +31,13 @@ urlpatterns = [
     url(r'^donating/$', 'feedingindia.views.donating', name='donating'),
     url(r'^pickup/$', 'feedingindia.views.pickup', name='pickup'),
     url(r'^all_donating/$', 'feedingindia.views.all_donating', name='all_donating'),
+    url(r'^all_delivery/$', 'feedingindia.views.all_delivery', name='all_delivery'),
     url(r'^add_data_donating/$', 'feedingindia.views.add_data_donating', name='add_data_donating'),
     url(r'^add_data_pickup/$', 'feedingindia.views.add_data_pickup', name='add_data_pickup'),
     url(r'^thankyou_register/$', 'feedingindia.views.thankyou_register', name='thankyou_register'),
     url(r'^thankyou_donation/$', 'feedingindia.views.thankyou_donation', name='thankyou_donation'),
     url(r'^all_donating/upvoter/(?P<uid>[\*\w\-]+)$',
         'feedingindia.views.upvoter', name='upvoter'),
+    url(r'^all_delivery/upvoter1/(?P<uid>[\*\w\-]+)$',
+        'feedingindia.views.upvoter1', name='upvoter1'),
 ]

@@ -12,8 +12,8 @@ from time import gmtime, strftime
 
 @csrf_exempt
 def upvoter1(request, uid):
-    delivery_instance = Donation.objects.get(contact=uid)
-    delivery_instance.counter = donation_instance.counter + 1
+    delivery_instance = Pickup.objects.get(contact_donator=uid)
+    delivery_instance.counter = delivery_instance.counter + 1
     delivery_instance.save()
     return redirect("all_delivery")
 
@@ -45,10 +45,10 @@ def all_delivery(request):
           arr.append(volunteer_data)
   context_dict['volunteer_arr'] = arr
   # print(context_dict)
-  return render(request, 'feedingindia/volunteer_pickup.html', context_dict)
+  return render(request, 'feedingindia/Volunteer/all_delivered.html', context_dict)
 
 def add_data_pickup(request):
-  instance = Pickup.objects.create(
+  Pickup.objects.create(
         name_donator=request.POST.get("name_donator"),
         contact_donator=request.POST.get("contact_donator"),
         name_shelter=request.POST.get("name_shelter"),
@@ -58,7 +58,6 @@ def add_data_pickup(request):
         food_for_donate=request.POST.get("food_for_donate"),
         counter=0
         )
-   
   return render(request, 'feedingindia/thankyou_donation.html')
 
 

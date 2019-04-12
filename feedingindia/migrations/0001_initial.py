@@ -54,7 +54,14 @@ class Migration(migrations.Migration):
             name='Pickup',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
+                ('name_donator', models.CharField(max_length=250, null=True)),
+                ('contact_donator', models.IntegerField(null=True)),
+                ('name_shelter', models.CharField(max_length=250, null=True)),
+                ('address_shelter', models.CharField(max_length=250, null=True)),
+                ('time_delivery', models.CharField(max_length=250, null=True)),
+                ('date_delivery', models.CharField(max_length=250, null=True)),
                 ('food_for_donate', models.IntegerField(null=True)),
+                ('counter', models.IntegerField(null=True)),
             ],
         ),
         migrations.CreateModel(
