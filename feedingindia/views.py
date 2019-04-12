@@ -44,7 +44,7 @@ def all_delivery(request):
           volunteer_data['counter'] = i.counter
           arr.append(volunteer_data)
   context_dict['volunteer_arr'] = arr
-  # print(context_dict)
+  print(context_dict)
   return render(request, 'feedingindia/Volunteer/all_delivered.html', context_dict)
 
 def add_data_pickup(request):
@@ -172,6 +172,7 @@ def dashboard(request):
     volunteer_data = []
     volunteer_data.append(float(i.latitude))
     volunteer_data.append(float(i.longitude))
+    volunteer_data.append(i.name)
     arr.append(volunteer_data)
   context_dict['volunteer_coordinate'] = arr
 
@@ -181,6 +182,7 @@ def dashboard(request):
     donater_data = []
     donater_data.append(float(i.latitude))
     donater_data.append(float(i.longitude))
+    donater_data.append(i.name)
     arr1.append(donater_data)
   context_dict['donater_coordinate'] = arr1 
 
@@ -190,6 +192,7 @@ def dashboard(request):
     shelter_data = []
     shelter_data.append(float(i.latitude))
     shelter_data.append(float(i.longitude))
+    shelter_data.append(i.name_hunger_spot)
     arr2.append(shelter_data)
   context_dict['shelter_coordinate'] = arr2 
   print(context_dict)

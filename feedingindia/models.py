@@ -91,9 +91,3 @@ class Admin(models.Model):
 
     def __str__(self):
         return self.user.username
-
-	# venue_address = models.CharField(max_length = 250,null=True)
- #    venue_pincode = models.CharField(max_length = 250,null=True)
- #    time = models.CharField(max_length = 250,null=True)
- #    request = models.CharField(max_length = 250,null=True)
- #    drop_off = models.CharField(max_length = 250,null=True)

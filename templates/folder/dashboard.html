@@ -117,17 +117,20 @@
             }
             function setMarkers(map){
                 {% for item in volunteer_coordinate %}
+                
                 var markera{{loop.counter}} = new google.maps.Marker({
                     position: {lat:{{item.0}}, lng:{{item.1}}},
                     map:map,
-                    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                    title: '{{item.2}}'
                 });
                 {% endfor %}
                 {% for item in donater_coordinate %}
                 var markerb{{loop.counter}} = new google.maps.Marker({
                     position: {lat:{{item.0}}, lng:{{item.1}}},
                     map:map,
-                    icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                    title: '{{item.2}}'
                 });
                 {% endfor %}
 
@@ -135,7 +138,8 @@
                 var markerc{{loop.counter}} = new google.maps.Marker({
                     position: {lat:{{item.0}}, lng:{{item.1}}},
                     map:map,
-                    icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+                    title: '{{item.2}}'
                 });
                 {% endfor %}
             }
