@@ -58,15 +58,29 @@ class Shelter(models.Model):
     def __unicode__(self):
         return self.name
 
-
+#freshfood
 class Donation(models.Model):
     name = models.CharField(max_length=250, null=True)
     contact = models.CharField(max_length=250, null=True)
     address = models.CharField(max_length=250, null=True)
+    type_of_donation = models.CharField(max_length=250, null=True)
     date_donate = models.CharField(max_length = 250,null=True)
     time_donate = models.CharField(max_length = 250,null=True)
-    food_for_donate = models.IntegerField()
-    counter = models.IntegerField()
+    food_for_donate = models.IntegerField(null=True)
+    counter = models.IntegerField(null=True)
+
+    def __unicode__(self):
+        return self.name
+
+class Pickup(models.Model):
+    name_donator: models.CharField(max_length=250, null=True)
+    contact_donator: models.IntegerField(max_length=250, null=True)
+    name_shelter: models.CharField(max_length=250, null=True)
+    address_shelter: models.CharField(max_length=250, null=True)
+    time_delivery: models.CharField(max_length=250, null=True)
+    date_delivery: models.CharField(max_length=250, null=True)
+    food_for_donate = models.IntegerField(null=True)
+    counter: models.IntegerField(null=True)
 
     def __unicode__(self):
         return self.name
